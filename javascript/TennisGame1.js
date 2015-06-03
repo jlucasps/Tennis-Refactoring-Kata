@@ -26,17 +26,24 @@ TennisGame1.prototype.getScore = function() {
     var isDraw = function(player1Score, player2Score){
         return player1Score == player2Score;
     };
-    if (isDraw(this.player1Score, this.player2Score)) {
-        score = getScoreForDraw(this.player1Score);
-    } else if (this.player1Score >= 4 || this.player2Score >= 4) {
-        
-        var scoreDifference = this.player1Score - this.player2Score;
 
+    var isAdvantageOrWonGame = function(player1Score, player2Score) {
+        return player1Score >= 4 || player2Score >= 4;
+    }
+
+    var getScoreForAdvantageOrWon = function(player1Score, player2Score){
+        var scoreDifference = player1Score - player2Score;
         if (scoreDifference === 1) score = "Advantage player1";
         else if (scoreDifference === -1) score = "Advantage player2";
         else if (scoreDifference >= 2) score = "Win for player1";
         else score = "Win for player2";
+        return score;
+    }
 
+    if (isDraw(this.player1Score, this.player2Score)) {
+        score = getScoreForDraw(this.player1Score);
+    } else if (isAdvantageOrWonGame(this.player1Score, this.player2Score)) {
+        score = getScoreForAdvantageOrWon(this.player1Score, this.player2Score);
     } else {
         for (var i = 1; i < 3; i++) {
             if (i === 1) tempScore = this.player1Score;
