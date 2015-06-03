@@ -1,35 +1,48 @@
 var TennisGame1 = function(player1Name, player2Name) {
-    this.m_score1 = 0;
-    this.m_score2 = 0;
+    this.player1Score = 0;
+    this.player2Score = 0;
     this.player1Name = player1Name;
     this.player2Name = player2Name;
 };
 
 TennisGame1.prototype.wonPoint = function(playerName) {
     if (playerName === "player1")
-        this.m_score1 += 1;
+        this.player1Score += 1;
     else
-        this.m_score2 += 1;
+        this.player2Score += 1;
 };
+
+
 
 TennisGame1.prototype.getScore = function() {
     var score = "";
     var tempScore = 0;
-    var scores = ["Love-All", "Fifteen-All", "Thirty-All"];
-    if (this.m_score1 === this.m_score2) {
-        score = scores[this.m_score1] || "Deuce";
-    } else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-        var minusResult = this.m_score1 - this.m_score2;
-        if (minusResult === 1) score = "Advantage player1";
-        else if (minusResult === -1) score = "Advantage player2";
-        else if (minusResult >= 2) score = "Win for player1";
+
+    var getScoreForDraw = function(playersScore) {
+        var scores = ["Love-All", "Fifteen-All", "Thirty-All"];
+        return scores[playersScore] || "Deuce";
+    };
+    
+    var isDraw = function(player1Score, player2Score){
+        return player1Score == player2Score;
+    };
+    if (isDraw(this.player1Score, this.player2Score)) {
+        score = getScoreForDraw(this.player1Score);
+    } else if (this.player1Score >= 4 || this.player2Score >= 4) {
+        
+        var scoreDifference = this.player1Score - this.player2Score;
+
+        if (scoreDifference === 1) score = "Advantage player1";
+        else if (scoreDifference === -1) score = "Advantage player2";
+        else if (scoreDifference >= 2) score = "Win for player1";
         else score = "Win for player2";
+
     } else {
         for (var i = 1; i < 3; i++) {
-            if (i === 1) tempScore = this.m_score1;
+            if (i === 1) tempScore = this.player1Score;
             else {
                 score += "-";
-                tempScore = this.m_score2;
+                tempScore = this.player2Score;
             }
             switch (tempScore) {
                 case 0:
