@@ -28,7 +28,9 @@ TennisGame1.prototype.getScore = function() {
     };
 
     var isAdvantageOrWonGame = function(player1Score, player2Score) {
-        return player1Score >= 4 || player2Score >= 4;
+        var REQUIRED_POINTS_FOR_ADVANTAGE_OR_VICTORY = 3
+        return player1Score > REQUIRED_POINTS_FOR_ADVANTAGE_OR_VICTORY 
+               || player2Score > REQUIRED_POINTS_FOR_ADVANTAGE_OR_VICTORY;
     }
 
     var getScoreForAdvantageOrWon = function(player1Score, player2Score){
