@@ -24,8 +24,7 @@ class TennisGame1 < TennisGame
   def initialize(player1Name, player2Name)
     @player1Name = player1Name
     @player2Name = player2Name
-    @p1points = 0
-    @p2points = 0
+    super()
   end
 
   def won_point(playerName)

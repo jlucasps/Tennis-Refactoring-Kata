@@ -112,14 +112,39 @@ end
 
 class TennisGame1Test < Test::Unit::TestCase
 
+  def setup
+    @game = TennisGame1.new('player1', 'player2')
+  end
+
   def test_is_inherited_from_tennis_game
     assert(TennisGame1.ancestors.include? TennisGame)
   end
 
+  def test_love_all
+    assert_equal("Love-All", @game.score)
+  end
+
+  def test_fifteen_all
+    @game.won_point('player1') and @game.won_point('player2')
+    assert_equal('Fifteen-All', @game.score)
+  end
+
+  def test_thirty_all
+    2.times { @game.won_point('player1') and @game.won_point('player2') }
+    assert_equal('Thirty-All', @game.score)
+  end
+
+  def test_deuce
+    3.times { @game.won_point('player1') and @game.won_point('player2') }
+    assert_equal('Deuce', @game.score)
+  end
+
+  def test_deuce_4_points
+    4.times { @game.won_point('player1') and @game.won_point('player2') }
+    assert_equal('Deuce', @game.score)
+  end
+
 end
-
-
-
 
 
 
