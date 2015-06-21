@@ -1,5 +1,25 @@
 
-class TennisGame1
+class TennisGame
+
+  attr_accessor :p1points
+  attr_accessor :p2points
+
+  def initialize
+    @p1points = 0
+    @p2points = 0
+  end
+
+  def p1_score
+    @p1points += 1
+  end
+
+  def p2_score
+    @p2points += 1
+  end
+
+end
+
+class TennisGame1 < TennisGame
 
   def initialize(player1Name, player2Name)
     @player1Name = player1Name
@@ -7,7 +27,7 @@ class TennisGame1
     @p1points = 0
     @p2points = 0
   end
-        
+
   def won_point(playerName)
     if playerName == @player1Name
       @p1points += 1
@@ -15,7 +35,7 @@ class TennisGame1
       @p2points += 1
     end
   end
-  
+
   def score
     result = ""
     tempScore=0
@@ -63,7 +83,7 @@ class TennisGame2
     @p1points = 0
     @p2points = 0
   end
-      
+
   def won_point(playerName)
     if playerName == @player1Name
       p1Score()
@@ -89,7 +109,7 @@ class TennisGame2
     if (@p1points==@p2points and @p1points>2)
         result = "Deuce"
     end
-    
+
     p1res = ""
     p2res = ""
     if (@p1points > 0 and @p2points==0)
@@ -115,11 +135,11 @@ class TennisGame2
       if (@p2points==3)
         p2res = "Forty"
       end
-      
+
       p1res = "Love"
       result = p1res + "-" + p2res
     end
-    
+
     if (@p1points>@p2points and @p1points < 4)
       if (@p1points==2)
         p1res="Thirty"
@@ -180,7 +200,7 @@ class TennisGame2
   def p1Score
     @p1points +=1
   end
-  
+
   def p2Score
     @p2points +=1
   end
@@ -193,7 +213,7 @@ class TennisGame3
     @p1 = 0
     @p2 = 0
   end
-      
+
   def won_point(n)
     if n == @p1N
         @p1 += 1
@@ -201,7 +221,7 @@ class TennisGame3
         @p2 += 1
     end
   end
-  
+
   def score
     if (@p1 < 4 and @p2 < 4) and (@p1 + @p2 < 6)
       p = ["Love", "Fifteen", "Thirty", "Forty"]
